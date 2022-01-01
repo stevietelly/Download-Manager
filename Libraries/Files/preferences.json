@@ -1,0 +1,100 @@
+{
+ "preferences": [
+  {
+   "setting": [
+    "internet_validation"
+   ],
+   "value": [
+    false
+   ]
+  },
+  {
+   "setting": [
+    "link_validation"
+   ],
+   "value": [
+    false
+   ]
+  },
+  {
+   "setting": [
+    "concurrency_limit"
+   ],
+   "value": [
+    "10"
+   ]
+  },
+  {
+   "setting": [
+    "approval"
+   ],
+   "value": [
+    false
+   ]
+  },
+  {
+   "setting": [
+    "directory"
+   ],
+   "value": [
+    "C:/Users/USER/Downloads"
+   ]
+  },
+  {
+   "setting": [
+    "warning"
+   ],
+   "value": [
+    false
+   ]
+  },
+  {
+   "setting": [
+    "theme"
+   ],
+   "value": [
+    "Dark"
+   ]
+  },
+  {
+   "setting": [
+    "notifications"
+   ],
+   "value": [
+    true
+   ]
+  },
+  {
+   "setting": [
+    "warn_settings"
+   ],
+   "value": [
+    true
+   ]
+  },
+  {
+   "setting": [
+    "save_down_proc"
+   ],
+   "value": [
+    true
+   ]
+  },
+  {
+   "setting": [
+    "beep_finish"
+   ],
+   "value": [
+    true
+   ]
+  },
+  {
+   "setting": [
+    "beep_error"
+   ],
+   "value": [
+    true
+   ]
+  }
+ ]
+}
