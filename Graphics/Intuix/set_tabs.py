@@ -1,6 +1,6 @@
 import Assets.Functions.Parser as p
-from Graphics.Popups import SnackBar
-from Graphics.Colors import get_main_theme_color
+from Graphics.Popups import PopupBox, SnackBar
+from Graphics.Colors import get_main_theme_color, get_sub_theme_color
 
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
@@ -135,11 +135,34 @@ theme_box_b = BoxLayout(size_hint=(.6, 1))
 theme_input = TextInput(pos_hint={'x': 0, 'y': .05}, size_hint=(None, None), multiline=False, width=dp(400),
                         height=dp(30), text=p.KeyMatch().match("theme"))
 
+
 theme_box_b.add_widget(theme_input)
 theme_box_b.add_widget(Widget())
 
+def change_theme(theme):
+    theme_input.text = theme
+    theme_popup.color(get_sub_theme_color("string"))
+    theme_popup.exit()
+    SnackBar(message="Theme Changed. Restart App to save changes")
+
+theme_popup = PopupBox(essence="central", title="Change Theme", escape="true", bg_color=get_sub_theme_color("string"), size_hint=(.5, .6))
+contentBox = BoxLayout(orientation="vertical")
+top = BoxLayout(orientation="horizontal")
+
+top.add_widget(Button(text="Ocean_Blue", background_down = "", background_normal = "", background_color="#298CFF", on_press=lambda obj:change_theme("Ocean_Blue")))
+top.add_widget(Button(text="Pink-lady", background_down = "", background_normal = "", background_color="#FF808C", on_press=lambda obj:change_theme("Pink-lady")))
+top.add_widget(Button(text="Dark", background_down = "", background_normal = "", background_color="#505050", on_press=lambda obj:change_theme("Dark")))
+
+bottom = BoxLayout(orientation="vertical")
+bottom.add_widget(Label(text="Restart App For maximum effects"))
+
+contentBox.add_widget(top)
+contentBox.add_widget(bottom)
+
+theme_popup.content(contentBox)
+
 theme_box_b.add_widget(
-    Button(text="Change", size_hint=(None, None), pos_hint={'x': 0, 'y': .05}, height=dp(30), width=dp(70)))
+    Button(text="Change", size_hint=(None, None), pos_hint={'x': 0, 'y': .05}, height=dp(30), on_press= lambda obj:theme_popup.pop(), width=dp(70)))
 theme_box_b.add_widget(Widget())
 
 theme_tab.add_widget(theme_box_a)

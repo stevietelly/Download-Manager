@@ -1,4 +1,6 @@
 import tkinter as tk
+import multiprocessing
+import threading
 import Assets.Functions.Parser as p
 from Assets.Functions.Data import shorten_string
 from Graphics.Colors import get_main_theme_color, get_sub_theme_color
@@ -22,10 +24,10 @@ class TellyHistories(tk.Frame):
 
         self.frame.bind("<Configure>", self.onFrameConfigure)
 
-        self.prepare()
+        multiprocessing.Process(self.prepare()).start()
 
     def populate(self, identifier, row):
-        """Put in some fake data"""
+        """add data on to the screen"""
         tab = tk.Frame(self.frame, height=150, bg="#FF6680", width=1000, borderwidth="1")
 
 
@@ -71,7 +73,7 @@ class Window:
         example.pack(side="top", fill="both", expand=True)
 
     def run(self):
-        self.window.mainloop()
+        threading.Thread(self.window.mainloop()).start()
 
 
     def quit(self):

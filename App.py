@@ -1,55 +1,72 @@
 from Graphics import Config
-from Graphics.Buttons import FlatButton
-from Assets.Functions.Networks import check_network_connection, check_link_validity
-from Assets.Functions.Data import shorten_int, get_standard_size, copy_data, paste_data, shorten_string, check_type, \
-    create_random_characters
-from Graphics.Colors import get_main_theme_color, get_sub_theme_color, get_transparent_sub_theme_color
-from Graphics.Popups import PopupBox, SnackBar
-from Graphics.Intuix.Settings import settings_bg_scroll, save_new_settings_query, restore_default_settings_query, \
-    affirm_settings, cancel_new_settings
-import Assets.Functions.Parser as p
-from Assets.Engine.Engine import TellyEngine
-from Graphics.Intuix.all_downloads_tab import all_downloads_bg, all_downloading, all_paused, all_finished, all_error, \
-    all_label, all_downloads_box
-from Graphics.Intuix.downloading_tab import downloading_bg, downloading_all, downloading_paused, downloading_finished, \
-    downloading_error, downloading_label
-from Graphics.Intuix.paused_downloads import paused_bg, paused_all, paused_downloading, paused_finished, paused_error, \
-    paused_label
-from Graphics.Intuix.error_downloads import error_bg, error_all, error_downloading, error_finished, error_paused, \
-    error_label
-from Graphics.Intuix.finished_downloads import finished_bg, finished_all, finished_downloading, finished_error, \
-    finished_paused, finished_label
-from Assets.Functions.Methods import do_nothing
-from Assets.Sound.Sound import beep
-from Graphics.Intuix.Histories import Window
-
-from kivymd.app import MDApp
-from kivy.lang.builder import Builder
-from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import ObjectProperty, ColorProperty
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.card import MDCard
-from kivy.uix.textinput import TextInput
-from kivy.clock import Clock
-from kivy.metrics import dp
-from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivymd.uix.navigationdrawer import MDNavigationDrawer
-from kivy.uix.widget import Widget
-from kivymd.uix.label import MDLabel
-from kivy.uix.image import Image
-from kivy.uix.floatlayout import FloatLayout
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.progressbar import MDProgressBar
-
+import datetime as dt
+import importlib
+import multiprocessing
+import os
 import platform
+import threading
 import tkinter as tk
 from tkinter import filedialog
-import importlib
-import threading
-import datetime as dt
-import os
-import multiprocessing
+
+from kivy.clock import Clock
+from kivy.lang.builder import Builder
+from kivy.metrics import dp
+from kivy.properties import ColorProperty, ObjectProperty
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
+from kivy.uix.label import Label
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.textinput import TextInput
+from kivy.uix.widget import Widget
+from kivymd.app import MDApp
+from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
+from kivymd.uix.navigationdrawer import MDNavigationDrawer
+from kivymd.uix.progressbar import MDProgressBar
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.menu import MDDropdownMenu
+
+import Assets.Functions.Parser as p
+from Assets.Engine.Engine import TellyEngine
+from Assets.Functions.Data import (check_type, copy_data,
+                                   create_random_characters, get_standard_size,
+                                   paste_data, shorten_int, shorten_string)
+from Assets.Functions.Methods import do_nothing
+from Assets.Functions.Networks import (check_link_validity,
+                                       check_network_connection)
+from Assets.Sound.Sound import beep
+
+from Graphics.Buttons import FlatButton
+from Graphics.Colors import (get_main_theme_color, get_sub_theme_color,
+                             get_transparent_sub_theme_color)
+from Graphics.Intuix.all_downloads_tab import (all_downloading,
+                                               all_downloads_bg,
+                                               all_downloads_box, all_error,
+                                               all_finished, all_label,
+                                               all_paused)
+from Graphics.Intuix.downloading_tab import (downloading_all, downloading_bg,
+                                             downloading_error,
+                                             downloading_finished,
+                                             downloading_label,
+                                             downloading_paused)
+from Graphics.Intuix.error_downloads import (error_all, error_bg,
+                                             error_downloading, error_finished,
+                                             error_label, error_paused)
+from Graphics.Intuix.finished_downloads import (finished_all, finished_bg,
+                                                finished_downloading,
+                                                finished_error, finished_label,
+                                                finished_paused)
+from Graphics.Intuix.Histories import Window
+from Graphics.Intuix.paused_downloads import (paused_all, paused_bg,
+                                              paused_downloading, paused_error,
+                                              paused_finished, paused_label)
+from Graphics.Intuix.Settings import (affirm_settings, cancel_new_settings,
+                                      restore_default_settings_query,
+                                      save_new_settings_query,
+                                      settings_bg_scroll)
+from Graphics.Popups import PopupBox, SnackBar
 
 Builder.load_string(
     """
@@ -110,10 +127,10 @@ class MainLayout(BoxLayout):
         self.add_widget(self.manager)
 
         # the individual screens are broken down to be added
-        self.home_tab_init()
-        self.settings_tab_init()
-        self.history_tab_init()
-        self.help_tab_init()
+        threading.Thread(self.home_tab_init()).start()
+        threading.Thread(self.settings_tab_init()).start()
+        threading.Thread(self.history_tab_init()).start()
+        threading.Thread(self.help_tab_init()).start()
 
         # a timer is added to update the whole program in intervals of 1/99 seconds
         Clock.schedule_interval(self.app_essentials_update, 1 / 99)
@@ -130,20 +147,33 @@ class MainLayout(BoxLayout):
         self.navbar.height = dp(40)
         self.home.add_widget(self.navbar)
 
-        self.navbar_init()
-        self.top_bar_init()
-        self.info_bar_init()
-        self.download_frame_init()
+        threading.Thread(self.navbar_init()).start()
+        threading.Thread(self.top_bar_init()).start()
+        threading.Thread(self.info_bar_init()).start()
+        threading.Thread(self.download_frame_init()).start()
 
         home_tab.add_widget(self.home)
 
         # drawer
         self.drawer = MDNavigationDrawer()
         self.drawer.md_bg_color = (.16, .55, 1, .3)
-        self.drawer_content_init()
+        threading.Thread(self.drawer_content_init()).start()
         home_tab.add_widget(self.drawer)
 
     def top_bar_init(self):
+        
+         # the drop down for the link box
+        self.dropdown = MDDropdownMenu(width_mult=100)
+        self.dropdown.background_color = get_sub_theme_color(essence="tuple")
+        self.dropdown.position = "bottom"
+        self.dropdown.border_margin = 0
+        
+
+        # the dropdown function
+        def drop(instance, touch):
+            if touch.button == "right":
+                if self.nav_link.focus:
+                    self.dropdown.open()
         # the top bar
         text_bx = BoxLayout(orientation="horizontal", size_hint=(1, None), height=dp(40))
 
@@ -153,6 +183,31 @@ class MainLayout(BoxLayout):
         self.nav_link.border = (5, 5, 5, 5)
         self.nav_link.hint_text = "Paste Link Here: Right click for more options"
         self.nav_link.on_text_validate = self.checker
+         # menu items for the dropdown
+        menu_items = [
+            {
+                "text": "Paste",
+                "viewclass": "OneLineListItem",
+                "on_release": do_nothing
+            },
+            {
+                "text": "Cancel",
+                "viewclass": "OneLineListItem",
+                "on_release": do_nothing
+            },
+            {
+                "text": "Copy",
+                "viewclass": "OneLineListItem",
+                "on_release": do_nothing
+            }
+        ]
+        self.dropdown.items = menu_items
+        
+        text_bx.ids['nav_link'] = self.nav_link
+        self.dropdown.caller = text_bx.ids.nav_link
+        self.nav_link.bind(on_touch_down=drop)
+       
+
 
         # the enter button
         self.enter_bt = Button(text="Enter", size_hint=(.1, 1), on_press=lambda obj: self.checker())
@@ -462,7 +517,7 @@ class MainLayout(BoxLayout):
         history_tab = Screen(name="history")
         self.manager.add_widget(history_tab)
 
-        self.back_hst = Button(text="Back", on_press=lambda obj: self.change_tab("home"), size_hint=(None, None))
+        self.back_hst = Button(text="Back", on_press=lambda obj: multiprocessing.Process(self.change_tab("home")).start, size_hint=(None, None))
         self.back_hst.background_normal = ""
         self.back_hst.height = dp(50)
         self.back_hst.width = dp(200)

@@ -50,6 +50,7 @@ class PopupBox:
         self.box.background = ""
         self.box.title = title
         self.box.title_color = "D3D1FF"
+        
 
     def warning_popup(self):
         self.box.title_color = "FF0114"
@@ -135,7 +136,7 @@ class PopupBox:
         if self.essence == "central":
             self.central_popup()
 
-        self.box.open()
+        threading.Thread(self.box.open()).start()
 
     def content(self, content=None):
 
@@ -148,7 +149,7 @@ class PopupBox:
         else:
             pass
 
-    def color(self, color):
+    def color(self, color, dt=None):
         self.box.background_color = color
 
     def exit(self):
@@ -174,7 +175,7 @@ class SnackBar:
             self.box.height = dp(70)
             self.box.width = dp(250)
             self.box.pos_hint = {'x': .7}
-            self.box.open()
+            threading.Thread(self.box.open()).start()
 
         elif essence == "extra":
             if p.KeyMatch().match("notifications"):
@@ -184,6 +185,6 @@ class SnackBar:
                 self.box.snackbar_y = dp(10)
                 self.box.size_hint = (.5, .1)
                 self.box.pos_hint = {'x': .7}
-                self.box.open()
+                threading.Thread(self.box.open()).start()
             elif not p.KeyMatch().match("notifications"):
                 pass
