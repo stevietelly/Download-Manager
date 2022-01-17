@@ -103,7 +103,7 @@ class TellyEngine:
                             break
 
     def resume_download(self):
-        threading.Thread(target=lambda: self.prep_resume_download())
+        threading.Thread(target=lambda: self.prep_resume_download()).start()
 
     def prep_download(self):
         with requests.get(self.link, stream=True, allow_redirects=True, timeout=5) as r:
@@ -116,4 +116,4 @@ class TellyEngine:
                         break
 
     def download_file(self):
-        threading.Thread(target=lambda: self.prep_download())
+        threading.Thread(target=lambda: self.prep_download()).start()

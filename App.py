@@ -188,17 +188,22 @@ class MainLayout(BoxLayout):
             {
                 "text": "Paste",
                 "viewclass": "OneLineListItem",
-                "on_release": do_nothing
+                "on_release": lambda :self.copy_paste_empty(receiver="nav_link", action="paste")
             },
             {
                 "text": "Cancel",
                 "viewclass": "OneLineListItem",
-                "on_release": do_nothing
+                "on_release": lambda :self.copy_paste_empty(receiver="nav_link", action="empty")
             },
             {
                 "text": "Copy",
                 "viewclass": "OneLineListItem",
-                "on_release": do_nothing
+                "on_release": lambda :self.copy_paste_empty(receiver="nav_link", action="copy")
+            },
+            {
+                "text": "Enter",
+                "viewclass": "OneLineListItem",
+                "on_release": self.checker
             }
         ]
         self.dropdown.items = menu_items
@@ -716,7 +721,11 @@ class MainLayout(BoxLayout):
             SnackBar(essence="info", message="Directory changed", bg_color=get_main_theme_color("tuple"))
 
     def checker(self):
+        # this checker is used to look for the actual url where it has been placed either in the nav_link textinput or in the download popup
+        #it also checks for empty input from both textinputs, internet connection and url validity
+        
         importlib.reload(p)
+        #Refresh the preferences
         if not self.nav_link.text and not self.url_box.text:
             PopupBox(essence="warn", error_code="URL345", message="Failure: No URL was encountered", beep=True).pop()
         elif not check_network_connection(use="external"):
@@ -724,7 +733,8 @@ class MainLayout(BoxLayout):
 
         else:
             if self.nav_link.text:
-                if not check_link_validity(url=self.nav_link.text, use="internal"):
+                
+                if not check_link_validity(url=self.nav_link.text, use="external"):
                     PopupBox(essence="warn", error_code="URL201", message="Failure: Invalid URL",
                              beep=True).pop()
                     self.nav_link.text = ""
@@ -733,7 +743,7 @@ class MainLayout(BoxLayout):
                     self.nav_link.text = ""
 
             elif self.url_box.text:
-                if not check_link_validity(url=self.url_box.text, use="internal"):
+                if not check_link_validity(url=self.url_box.text, use="external"):
                     PopupBox(essence="warn", error_code="URL202", message="Failure: Invalid URL",
                              beep=True).pop()
                     self.url_box.text = ""
@@ -848,9 +858,8 @@ class MainLayout(BoxLayout):
     def init_download(self, sequence):
         if sequence.confirm_existence():
             self.add_download_tab("all", sequence)
-            print("valid sequence")
         elif not sequence.confirm_existence():
-            print("invalid sequence")
+            PopupBox(essence="warn", title="Error Sequence", error_code="SEQ 124", message="invalid sequence").pop()
 
     def add_download_tab(self, receiver, sequence):
 

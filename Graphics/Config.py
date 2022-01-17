@@ -11,7 +11,7 @@ Config.set('kivy', 'window_icon', 'Assets/Media/downloader.png')
 import os
 os.environ['KIVY_GL_BACKEND'] = 'angle_sdl2'
 
-app_version = "2.8.00"
+app_version = "2.9.01"
 total_downloads = 0
 total_sizes = 100
 total_speeds = 100
