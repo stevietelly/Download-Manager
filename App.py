@@ -12,6 +12,7 @@ from kivy.clock import Clock
 from kivy.lang.builder import Builder
 from kivy.metrics import dp
 from kivy.properties import ColorProperty, ObjectProperty
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
@@ -27,6 +28,7 @@ from kivymd.uix.navigationdrawer import MDNavigationDrawer
 from kivymd.uix.progressbar import MDProgressBar
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.button import MDIconButton
 
 import Assets.Functions.Parser as p
 from Assets.Engine.Engine import TellyEngine
@@ -58,7 +60,6 @@ from Graphics.Intuix.finished_downloads import (finished_all, finished_bg,
                                                 finished_downloading,
                                                 finished_error, finished_label,
                                                 finished_paused)
-from Graphics.Intuix.Histories import Window
 from Graphics.Intuix.paused_downloads import (paused_all, paused_bg,
                                               paused_downloading, paused_error,
                                               paused_finished, paused_label)
@@ -131,6 +132,7 @@ class MainLayout(BoxLayout):
         threading.Thread(self.settings_tab_init()).start()
         threading.Thread(self.history_tab_init()).start()
         threading.Thread(self.help_tab_init()).start()
+      
 
         # a timer is added to update the whole program in intervals of 1/99 seconds
         Clock.schedule_interval(self.app_essentials_update, 1 / 99)
@@ -161,13 +163,13 @@ class MainLayout(BoxLayout):
         home_tab.add_widget(self.drawer)
 
     def top_bar_init(self):
-        
+
          # the drop down for the link box
         self.dropdown = MDDropdownMenu(width_mult=100)
         self.dropdown.background_color = get_sub_theme_color(essence="tuple")
         self.dropdown.position = "bottom"
         self.dropdown.border_margin = 0
-        
+
 
         # the dropdown function
         def drop(instance, touch):
@@ -178,9 +180,12 @@ class MainLayout(BoxLayout):
         text_bx = BoxLayout(orientation="horizontal", size_hint=(1, None), height=dp(40))
 
         self.nav_link = TextInput(size_hint=(1, 1), multiline=False)
+        self.nav_link.background_active = ""
+        self.nav_link.foreground_color = (1, 1, 1, 1)
+        self.nav_link.background_normal = ""
         self.nav_link.font_name = "Assets/Fonts/Roboto-Light.ttf"
         self.nav_link.font_size = 18
-        self.nav_link.border = (5, 5, 5, 5)
+        # self.nav_link.border = (10, 5, 5, 5)
         self.nav_link.hint_text = "Paste Link Here: Right click for more options"
         self.nav_link.on_text_validate = self.checker
          # menu items for the dropdown
@@ -207,11 +212,11 @@ class MainLayout(BoxLayout):
             }
         ]
         self.dropdown.items = menu_items
-        
+
         text_bx.ids['nav_link'] = self.nav_link
         self.dropdown.caller = text_bx.ids.nav_link
         self.nav_link.bind(on_touch_down=drop)
-       
+
 
 
         # the enter button
@@ -519,33 +524,154 @@ class MainLayout(BoxLayout):
         self.settings_holder.add_widget(settings_bg_scroll)
 
     def history_tab_init(self):
-        history_tab = Screen(name="history")
-        self.manager.add_widget(history_tab)
+        # history_tab = Screen(name="history")
+        # self.manager.add_widget(history_tab)
+        
+        # top = BoxLayout(size_hint=(1, .05), pos_hint={'x': 0, 'y': .93}, orientation="vertical")
+        
+       
+        # self.history_holder.orientation = "vertical"
+        # history_tab.add_widget(top)
+        
+        # bottom = BoxLayout(size_hint=(1, .92), orientation="vertical")
+        # stroller = ScrollView()
+        # stroller.bar_color = "298AFF"
+        # stroller.bar_width = 5
+        # stroller.do_scroll_y = True
+        # self.history_holder = BoxLayout(size_hint=(1, None), orientation="vertical")
+
+        # stroller.add_widget(self.history_holder)
+        # bottom.add_widget(stroller)
+        # history_tab.add_widget(bottom)
+        history = Screen(name="history")
+
+        top = BoxLayout(size_hint=(1, .05), pos_hint={'x': 0, 'y': .93})
 
         self.back_hst = Button(text="Back", on_press=lambda obj: multiprocessing.Process(self.change_tab("home")).start, size_hint=(None, None))
         self.back_hst.background_normal = ""
         self.back_hst.height = dp(50)
         self.back_hst.width = dp(200)
-        self.back_hst.pos_hint = {'x': 0, 'y': .93}
-        history_tab.add_widget(self.back_hst)
+        #self.back_hst.pos_hint = {'x': 0, 'y': .93}
+        top.add_widget(self.back_hst)
 
-        history_tab.add_widget(Image(source="Assets/Media/history.png", size_hint=(None, None), height=dp(50),
-                                     width=dp(50), pos_hint={'x': .21, "y": .93}))
+        top.add_widget(Image(source="Assets/Media/history.png", size_hint=(None, None), height=dp(50),
+                                     width=dp(50)))
 
-        history_tab.add_widget(
+        top.add_widget(
             Label(text="History", size_hint=(None, None), size=(dp(150), dp(50)), font_size=40, halign="left",
-                  font_name="Assets/Fonts/Roboto-Light.ttf", pos_hint={"x": .25, "y": .93}))
+                  font_name="Assets/Fonts/Roboto-Light.ttf"))
 
-        self.history_holder.size_hint = (1, .9)
-        self.history_holder.orientation = "vertical"
-        history_tab.add_widget(self.history_holder)
+        top.add_widget(Widget())
+        top.add_widget(
+            Button(text="Clear All Histories", size_hint=(None, None), background_normal="", background_down="", background_color="FF5356",
+                   height=dp(50), width=dp(250), pos_hint={'x': .45, 'y': 0}, on_press=lambda obj: threading.Thread(delete_it).start())
+        )
+       
+
+        def deleting_download(obj):
+            str(obj)
+            print(p.StorageAPI().get_all_pids())
+            for pid in p.StorageAPI().get_all_pids():
+                self.history_holder.remove_widget(self.history_holder.ids[str(pid)])
+
+            p.StorageAPI().delete_all_data()
+            SnackBar(essence="extra", message="Record Deleted", bg_color=get_sub_theme_color(essence="tuple"))
+
+        def delete_it():
+            if not p.KeyMatch().match("save_down_proc"):
+                deleting_download(obj=None)
+            elif p.KeyMatch().match("save_down_proc"):
+                box = PopupBox(essence="central", title="Cancel Download",
+                               bg_color=get_sub_theme_color(essence="string"),
+                               escape=False)
+
+                def leave(obj):
+                    str(obj)
+                    box.exit()
+        
+
+        bottom = BoxLayout(size_hint=(1, .92))
+        stroller = ScrollView()
+        stroller.bar_color = "298AFF"
+        stroller.bar_width = 5
+        stroller.do_scroll_y = True
+        self.history_holder = BoxLayout(size_hint=(1, None), orientation="vertical")
+
+        def hst():
+            for i in p.StorageAPI().get_all_ids():
+                self.history_tabs(i)
+        threading.Thread(target=lambda: hst()).start()
+       
+       
+        history.add_widget(top)
+        history.add_widget(bottom)
+        bottom.add_widget(stroller)
+        stroller.add_widget(self.history_holder)
+        
+        self.manager.add_widget(history)
+
+        def update_history(delta_time):
+            
+            self.history_holder.height = len(p.StorageAPI().get_all_ids()) * 100
+
+        Clock.schedule_interval(update_history, 1 / 99999999999)
+
+    def open_help(self, obj):
+        str(obj)
+        self.manager.current = "help"
+        SnackBar(essence="extra", message="Help", bg_color=get_sub_theme_color(essence="tuple"))
+
+    def open_history(self, obj):
+        str(obj)
+        self.manager.current = "history"
+        SnackBar(essence="extra", message="History", bg_color=get_sub_theme_color(essence="tuple"))
+
+    def error_downloads_screen_content(self):
+        holder_bx = BoxLayout(orientation="vertical")
+        down_box = BoxLayout(size_hint=(1, .07))
+
+        # the Label
+        down_info_label = MDLabel(text="Error Downloads", font_name="Assets/fonts/FiraCode-Bold.ttf", size_hint=(.3, 1),
+                                  pos_hint={'x': .2, 'y': 0})
+        down_box.add_widget(down_info_label)
+        down_info_label.color = (1, 1, 1, 1)
+        down_info_label.font_size = dp(25)
+
+        down_info_no_label = MDLabel(text="0", font_name="Assets/fonts/FiraCode-Bold.ttf", size_hint=(.1, 1))
+        down_box.add_widget(down_info_no_label)
+        down_info_no_label.color = (1, 1, 1, 1)
+        down_info_no_label.font_size = dp(15)
+
+        left = MDIconButton(icon="arrow-left-bold-hexagon-outline", on_press=self.open_finished_download_screen)
+
+        down_box.add_widget(left)
+
+        holder_bx.add_widget(down_box)
+
+        scroll_all = ScrollView()
+        scroll_all.bar_color = "298AFF"
+        scroll_all.bar_width = 5
+        scroll_all.do_scroll_y = True
+
+        self.error_downloads_box = BoxLayout(orientation="vertical", size_hint=(1, None))
+
+        # adding widgets
+        self.error_downloads_screen.add_widget(holder_bx)
+        holder_bx.add_widget(scroll_all)
+        scroll_all.add_widget(self.error_downloads_box)
+
+        def mini_update(delta_t):
+            str(delta_t)
+            down_info_no_label.text = str(self.errors)
+
+        Clock.schedule_interval(mini_update, 1 / 99999999999)
 
     def help_tab_init(self):
         help_tab = Screen(name="help")
         self.manager.add_widget(help_tab)
 
-        self.back_hp = Button(text="Back", on_press=lambda obj: self.change_tab("home"), size_hint=(None, None))
-        self.back_hp.bind(on_release=lambda obj: Window().quit())
+        self.back_hp = Button(text="Back", on_press=lambda obj: multiprocessing.Process(self.change_tab("home")).start(), size_hint=(None, None))
+     
         self.back_hp.background_normal = ""
         self.back_hp.height = dp(50)
         self.back_hp.width = dp(200)
@@ -567,7 +693,6 @@ class MainLayout(BoxLayout):
                 self.manager.current = tab
         elif tab == "history":
             self.manager.current = tab
-            threading.Thread(target=lambda: Window().run()).start()
 
         else:
             self.manager.current = tab
@@ -575,13 +700,16 @@ class MainLayout(BoxLayout):
     def app_essentials_update(self, delta_t):
         str(delta_t)
 
+        """The customized tabs labels that show the stats"""
         all_label.text = str(self.downloads + self.errors + self.paused + self.finished)
         downloading_label.text = str(self.downloads)
         paused_label.text = str(self.paused)
         error_label.text = str(self.errors)
         finished_label.text = str(self.finished)
 
+        # update the downloads box in the mini-tabs
         all_downloads_box.height = self.downloads * 100
+        
         # themes and colors
         self.theme = get_main_theme_color(essence="tuple")
         self.drawer.md_bg_color = get_main_theme_color(essence="tuple")
@@ -592,7 +720,7 @@ class MainLayout(BoxLayout):
         self.back_hst.background_color = get_transparent_sub_theme_color(essence="string")
         self.back_hp.background_color = get_transparent_sub_theme_color(essence="string")
 
-        # info bar
+        # info bar statistics
 
         # checking for internet connection
         if check_network_connection():
@@ -723,7 +851,7 @@ class MainLayout(BoxLayout):
     def checker(self):
         # this checker is used to look for the actual url where it has been placed either in the nav_link textinput or in the download popup
         #it also checks for empty input from both textinputs, internet connection and url validity
-        
+
         importlib.reload(p)
         #Refresh the preferences
         if not self.nav_link.text and not self.url_box.text:
@@ -733,7 +861,7 @@ class MainLayout(BoxLayout):
 
         else:
             if self.nav_link.text:
-                
+
                 if not check_link_validity(url=self.nav_link.text, use="external"):
                     PopupBox(essence="warn", error_code="URL201", message="Failure: Invalid URL",
                              beep=True).pop()
@@ -859,7 +987,7 @@ class MainLayout(BoxLayout):
         if sequence.confirm_existence():
             self.add_download_tab("all", sequence)
         elif not sequence.confirm_existence():
-            PopupBox(essence="warn", title="Error Sequence", error_code="SEQ 124", message="invalid sequence").pop()
+            PopupBox(essence="warn", title="Error Sequence", error_code="SEQ124", message="invalid sequence").pop()
 
     def add_download_tab(self, receiver, sequence):
 
@@ -1088,6 +1216,10 @@ class MainLayout(BoxLayout):
         if os.path.exists(sequence.get_error_file()):
             os.remove(sequence.get_error_file())
 
+    def populate_history(self):
+        for i in p.StorageAPI().get_all_ids():
+            self.history_tabs(i)
+    
     def history_tabs(self, identifier):
         history_tab = BoxLayout()
         history_tab.spacing = (dp(5), dp(5))
@@ -1114,7 +1246,7 @@ class MainLayout(BoxLayout):
 
         stat_box = BoxLayout(orientation="horizontal")
 
-        state_label = MDLabel(text=str(p.StorageAPI().get_unknown(identifier, "media")), size_hint=(.1, 1))
+        state_label = MDLabel(text=shorten_string(str(p.StorageAPI().get_unknown(identifier, "media")), 14), size_hint=(.1, 1))
         state_label.color = "E0E3E6"
 
         size_label = MDLabel(
@@ -1142,7 +1274,10 @@ class MainLayout(BoxLayout):
             self.history_holder.remove_widget(self.history_holder.ids[pid])
             p.StorageAPI().delete_data(identifier)
             SnackBar(essence="extra", message="Record Deleted", bg_color=get_sub_theme_color(essence="tuple"))
-
+            threading.Thread(self.history_holder.clear_widgets()).start()
+            threading.Thread(self.populate_history()).start()
+            
+            
         def delete_it():
             if not p.KeyMatch().match("save_down_proc"):
                 deleting_download(obj=None)
@@ -1167,12 +1302,13 @@ class MainLayout(BoxLayout):
 
                 box.pop()
                 box.content(bg_back)
+        
 
         bt_box = BoxLayout(size_hint=(.04, 1), orientation="vertical")
 
-        url_paste = Button(text="Copy URL")
+        url_paste = MDIconButton(icon="content-copy")
         url_paste.on_press = copy_url
-        del_bt = Button(text="Delete")
+        del_bt = MDIconButton(icon="delete")
         del_bt.on_press = delete_it
 
         # adding the  widgets declared above

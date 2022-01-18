@@ -3,6 +3,7 @@ import random
 
 
 def shorten_int(data, length, pd):
+    """Shorten integers """
     if data > length:
         return str(pd)
     elif data < length:
@@ -10,6 +11,7 @@ def shorten_int(data, length, pd):
 
 
 def shorten_string(data, length):
+    """Shorten strings for easy use in the graphical interface"""
     if len(data) > length:
         return data[:length - 5] + "....."
     elif len(data) < length:

@@ -37,6 +37,7 @@ class TellyEngine:
                 name = re.findall("filename=\"(.+)\"", self.request.headers["Content-Disposition"])[0]
             else:
                 name = self.link.split("/")[-1]
+            name = name.split("?")[0]
             return name
         if not self.confirm_existence():
             name = "Failure: Error NM101.telly"
@@ -47,7 +48,7 @@ class TellyEngine:
             total_size = self.request.headers["Content-Length"]
             return int(total_size)
         elif not self.confirm_existence():
-            total_size = 10000000000
+            total_size = 1
             return total_size
 
     def get_media(self):

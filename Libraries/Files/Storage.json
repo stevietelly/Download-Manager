@@ -1,90 +1,5 @@
 [
  {
-  "id": "97a7o",
-  "tag": "3595x",
-  "pid": "31899",
-  "url": "http://d9.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "name": "Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "size": 70268934,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Sunday, January 16, 2022",
-   "start_time": " 10:58 PM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "96pk7",
-  "tag": "x1qy1",
-  "pid": "2o9n9",
-  "url": "http://d6.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "name": "Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "size": 70268934,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 08:56 AM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "21a12",
-  "tag": "46iu6",
-  "pid": "7d53u",
-  "url": "http://d6.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "name": "Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "size": 70268934,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 08:56 AM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "cv2z1",
-  "tag": "zwc6f",
-  "pid": "6ugjk",
-  "url": "http://d6.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "name": "Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "size": 70268934,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 08:58 AM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "97453",
-  "tag": "7j5vh",
-  "pid": "562j8",
-  "url": "http://d6.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "name": "Nancy Drew - S01E01 HD (TvShows4Mobile.Com) k2icp.mp4",
-  "size": 70268934,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 09:00 AM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
   "id": "t1sv7",
   "tag": "8ry1v",
   "pid": "m61d5",
@@ -102,40 +17,6 @@
   }
  },
  {
-  "id": "s1h96",
-  "tag": "w579y",
-  "pid": "82o4u",
-  "url": "http://d8.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E03 HD (TvShows4Mobile.Com) 2nq9o.mp4",
-  "name": "Nancy Drew - S01E03 HD (TvShows4Mobile.Com) 2nq9o.mp4",
-  "size": 63673832,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 09:07 AM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "1488u",
-  "tag": "q5l1k",
-  "pid": "t1957",
-  "url": "http://d2.o2tv.org/Nancy Drew/Season 01/Nancy Drew - S01E04 HD (TvShows4Mobile.Com) 8rgo2.mp4",
-  "name": "Nancy Drew - S01E04 HD (TvShows4Mobile.Com) 8rgo2.mp4",
-  "size": 70574265,
-  "media": "video/mp4",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 09:33 AM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
   "id": "lhry7",
   "tag": "p81n3",
   "pid": "5218g",
@@ -148,6 +29,210 @@
   "timestamp": {
    "start_date": "Monday, January 17, 2022",
    "start_time": " 09:34 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "e7hax",
+  "tag": "54y8v",
+  "pid": "6l468",
+  "url": "https://atom-installer.github.com/v1.58.0/AtomSetup-x64.exe?s=1627025639&ext=.exe",
+  "name": "AtomSetup-x64.exe",
+  "size": 199015128,
+  "media": "application/octet-stream",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Monday, January 17, 2022",
+   "start_time": " 10:45 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "kit4z",
+  "tag": "3646e",
+  "pid": "2861u",
+  "url": "https://atom-installer.github.com/v1.58.0/AtomSetup-x64.exe?s=1627025639&ext=.exe",
+  "name": "AtomSetup-x64.exe",
+  "size": 199015128,
+  "media": "application/octet-stream",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Monday, January 17, 2022",
+   "start_time": " 10:48 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "kb7s1",
+  "tag": "1d9r6",
+  "pid": "o59s7",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.telly",
+  "size": 10000000000,
+  "media": "unrecognized",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Monday, January 17, 2022",
+   "start_time": " 10:02 PM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "7916v",
+  "tag": "v2re3",
+  "pid": "18339",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.telly",
+  "size": 10000000000,
+  "media": "unrecognized",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Monday, January 17, 2022",
+   "start_time": " 10:02 PM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "4m95g",
+  "tag": "r5vwh",
+  "pid": "m54a3",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.mp4",
+  "size": 10000000000,
+  "media": "unrecognized",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Monday, January 17, 2022",
+   "start_time": " 10:06 PM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "15477",
+  "tag": "1ugyn",
+  "pid": "f7ip3",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.mp4",
+  "size": 10000000000,
+  "media": "unrecognized",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 07:13 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "5233b",
+  "tag": "v42nx",
+  "pid": "44os1",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.mp4",
+  "size": 10000000000,
+  "media": "video",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 07:15 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "i38a6",
+  "tag": "5lv83",
+  "pid": "521hi",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.mp4",
+  "size": 10000000000,
+  "media": "audio",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 07:16 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "c2465",
+  "tag": "1fjys",
+  "pid": "ggrqr",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.mp4",
+  "size": 10000000000,
+  "media": "audio",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 07:17 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "5137j",
+  "tag": "4xc2s",
+  "pid": "tjc6u",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.mp4",
+  "size": 10000000000,
+  "media": "font",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 07:18 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "59p1e",
+  "tag": "3ui53",
+  "pid": "c3pom",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.telly",
+  "size": 1,
+  "media": "unrecognized",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 11:22 AM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "182e4",
+  "tag": "dgyk2",
+  "pid": "d45n5",
+  "url": "https://hello.com",
+  "name": "Failure: Error NM101.telly",
+  "size": 1,
+  "media": "unrecognized",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Tuesday, January 18, 2022",
+   "start_time": " 12:21 PM",
    "finish_date": "",
    "finish_time": ""
   }

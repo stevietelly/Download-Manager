@@ -1,7 +1,9 @@
 # TellyDownloadManager
 A python based Download Manager.
-using the kivy library for th ui
-it does its job quite fine except it needs a bit more additions and perfomance enhancements
-anyone willing is welcomed to contact me
+using the kivy library for the user interface
+it is faster than common download managers and has alot of customization tools.
 
-telianstephen@gmail.com
+contact me at:
+
+Email: telianstephen@gmail.com
+twitter: @GelianaInc
