@@ -85,10 +85,12 @@ class StorageAPI:
     pids = []
 
     def __init__(self):
+        """This method saves information about all downloads"""
         file = open(self.file_name).read()
         self.datum = json.loads(file)
 
     def add_data(self, content):
+        """Save data into the file"""
         self.datum.append(content)
         d = json.dumps(self.datum, indent=1)
         with open(self.file_name, 'w') as f:
@@ -121,6 +123,7 @@ class StorageAPI:
                     f.write(d)
 
     def delete_all_data(self):
+        """Delete all the data in the file storage"""
         self.datum.clear()
         d = json.dumps(self.datum, indent=1)
         with open(self.file_name, 'w') as f:

@@ -68,40 +68,6 @@
   }
  },
  {
-  "id": "kb7s1",
-  "tag": "1d9r6",
-  "pid": "o59s7",
-  "url": "https://hello.com",
-  "name": "Failure: Error NM101.telly",
-  "size": 10000000000,
-  "media": "unrecognized",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 10:02 PM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "7916v",
-  "tag": "v2re3",
-  "pid": "18339",
-  "url": "https://hello.com",
-  "name": "Failure: Error NM101.telly",
-  "size": 10000000000,
-  "media": "unrecognized",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Monday, January 17, 2022",
-   "start_time": " 10:02 PM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
   "id": "4m95g",
   "tag": "r5vwh",
   "pid": "m54a3",
@@ -114,23 +80,6 @@
   "timestamp": {
    "start_date": "Monday, January 17, 2022",
    "start_time": " 10:06 PM",
-   "finish_date": "",
-   "finish_time": ""
-  }
- },
- {
-  "id": "15477",
-  "tag": "1ugyn",
-  "pid": "f7ip3",
-  "url": "https://hello.com",
-  "name": "Failure: Error NM101.mp4",
-  "size": 10000000000,
-  "media": "unrecognized",
-  "secondary_location": "downloading_screen",
-  "directory": "C:/Users/USER/Downloads",
-  "timestamp": {
-   "start_date": "Tuesday, January 18, 2022",
-   "start_time": " 07:13 AM",
    "finish_date": "",
    "finish_time": ""
   }
@@ -233,6 +182,23 @@
   "timestamp": {
    "start_date": "Tuesday, January 18, 2022",
    "start_time": " 12:21 PM",
+   "finish_date": "",
+   "finish_time": ""
+  }
+ },
+ {
+  "id": "n9666",
+  "tag": "xpd44",
+  "pid": "wrwk5",
+  "url": "https://github.com/Geliana/TellyDownloadManager/archive/refs/heads/main.zip",
+  "name": "main.zip",
+  "size": 594227,
+  "media": "application/zip",
+  "secondary_location": "downloading_screen",
+  "directory": "C:/Users/USER/Downloads",
+  "timestamp": {
+   "start_date": "Wednesday, January 19, 2022",
+   "start_time": " 08:35 AM",
    "finish_date": "",
    "finish_time": ""
   }

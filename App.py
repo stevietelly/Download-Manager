@@ -231,13 +231,12 @@ class MainLayout(BoxLayout):
 
     def navbar_init(self):
         # the navigation bar
-        self.navbar.add_widget(FlatButton(text="File", on_press=lambda obj: self.toggle_drawer()))
+        self.navbar.add_widget(FlatButton(text="File", on_press=lambda obj: threading.Thread(target = lambda :self.toggle_drawer()).start()))
         self.download_popup()
-        self.navbar.add_widget(FlatButton(text="Download", on_press=lambda obj: self.download_pop.pop()))
-
-        self.navbar.add_widget(FlatButton(text="Settings", on_press=lambda obj: self.change_tab("settings")))
-        self.navbar.add_widget(FlatButton(text="History", on_press=lambda obj: self.change_tab("history")))
-        self.navbar.add_widget(FlatButton(text="Help", on_press=lambda obj: self.change_tab("help")))
+        self.navbar.add_widget(FlatButton(text="Download", on_press=lambda obj: threading.Thread(target= lambda :self.download_pop.pop()).start()))
+        self.navbar.add_widget(FlatButton(text="Settings", on_press=lambda obj: threading.Thread(target=lambda :self.change_tab("settings")).start()))
+        self.navbar.add_widget(FlatButton(text="History", on_press=lambda obj: threading.Thread(target=lambda :self.change_tab("history")).start()))
+        self.navbar.add_widget(FlatButton(text="Help", on_press=lambda obj: threading.Thread(target=lambda :self.change_tab("help")).start()))
 
     def info_bar_init(self):
         # the info bar
@@ -305,36 +304,36 @@ class MainLayout(BoxLayout):
         button_box.add_widget(inf_label)
 
         all_down = MDCard(size_hint=(1, 1))
-        all_bt = Button(text="Show all downloads", on_press=lambda obj: self.change_download_tab("all"),
-                        background_normal="", background_color="8F8D8A", on_release=lambda obj: self.toggle_drawer())
+        all_bt = Button(text="Show all downloads", on_press=lambda obj: threading.Thread(target=lambda :self.change_download_tab("all")).start(),
+                        background_normal="", background_color="8F8D8A", on_release=lambda obj: threading.Thread(target=lambda :self.toggle_drawer()).start())
 
         all_down.add_widget(all_bt)
         button_box.add_widget(all_down)
 
         finished_down = MDCard(size_hint=(1, 1))
-        fin_bt = Button(text="Show finished downloads", on_press=lambda obj: self.change_download_tab("finished"),
-                        background_normal="", background_color="8F8D8A", on_release=lambda obj: self.toggle_drawer())
+        fin_bt = Button(text="Show finished downloads", on_press=lambda obj: threading.Thread(target=lambda :self.change_download_tab("finished")).start(),
+                        background_normal="", background_color="8F8D8A", on_release=lambda obj: threading.Thread(target=lambda :self.toggle_drawer()).start())
 
         finished_down.add_widget(fin_bt)
         button_box.add_widget(finished_down)
 
         down_down = MDCard(size_hint=(1, 1))
-        down_bt = Button(text="Show downloading", on_press=lambda obj: self.change_download_tab("downloading"),
-                         background_normal="", background_color="8F8D8A", on_release=lambda obj: self.toggle_drawer())
+        down_bt = Button(text="Show downloading", on_press=lambda obj: threading.Thread(target=lambda :self.change_download_tab("downloading")).start(),
+                         background_normal="", background_color="8F8D8A", on_release=lambda obj: threading.Thread(target=lambda :self.toggle_drawer()).start())
 
         down_down.add_widget(down_bt)
         button_box.add_widget(down_down)
 
         paused_down = MDCard(size_hint=(1, 1))
-        paused_bt = Button(text="Show all paused downloads", on_press=lambda obj: self.change_download_tab("paused"),
-                           background_normal="", background_color="8F8D8A", on_release=lambda obj: self.toggle_drawer())
+        paused_bt = Button(text="Show all paused downloads", on_press=lambda obj: threading.Thread(target=lambda :self.change_download_tab("paused")).start(),
+                           background_normal="", background_color="8F8D8A", on_release=lambda obj: threading.Thread(target=lambda :self.toggle_drawer()).start())
 
         paused_down.add_widget(paused_bt)
         button_box.add_widget(paused_down)
 
         error_down = MDCard(size_hint=(1, 1))
-        error_bt = Button(text="Show all Error downloads", on_press=lambda obj: self.change_download_tab("error"),
-                          background_normal="", background_color="8F8D8A", on_release=lambda obj: self.toggle_drawer())
+        error_bt = Button(text="Show all Error downloads", on_press=lambda obj: threading.Thread(target =lambda :self.change_download_tab("error")).start(),
+                          background_normal="", background_color="8F8D8A", on_release=lambda obj: threading.Thread(self.toggle_drawer()).start())
 
         error_down.add_widget(error_bt)
         button_box.add_widget(error_down)
@@ -524,25 +523,7 @@ class MainLayout(BoxLayout):
         self.settings_holder.add_widget(settings_bg_scroll)
 
     def history_tab_init(self):
-        # history_tab = Screen(name="history")
-        # self.manager.add_widget(history_tab)
-        
-        # top = BoxLayout(size_hint=(1, .05), pos_hint={'x': 0, 'y': .93}, orientation="vertical")
-        
        
-        # self.history_holder.orientation = "vertical"
-        # history_tab.add_widget(top)
-        
-        # bottom = BoxLayout(size_hint=(1, .92), orientation="vertical")
-        # stroller = ScrollView()
-        # stroller.bar_color = "298AFF"
-        # stroller.bar_width = 5
-        # stroller.do_scroll_y = True
-        # self.history_holder = BoxLayout(size_hint=(1, None), orientation="vertical")
-
-        # stroller.add_widget(self.history_holder)
-        # bottom.add_widget(stroller)
-        # history_tab.add_widget(bottom)
         history = Screen(name="history")
 
         top = BoxLayout(size_hint=(1, .05), pos_hint={'x': 0, 'y': .93})
@@ -551,7 +532,6 @@ class MainLayout(BoxLayout):
         self.back_hst.background_normal = ""
         self.back_hst.height = dp(50)
         self.back_hst.width = dp(200)
-        #self.back_hst.pos_hint = {'x': 0, 'y': .93}
         top.add_widget(self.back_hst)
 
         top.add_widget(Image(source="Assets/Media/history.png", size_hint=(None, None), height=dp(50),
@@ -564,27 +544,24 @@ class MainLayout(BoxLayout):
         top.add_widget(Widget())
         top.add_widget(
             Button(text="Clear All Histories", size_hint=(None, None), background_normal="", background_down="", background_color="FF5356",
-                   height=dp(50), width=dp(250), pos_hint={'x': .45, 'y': 0}, on_press=lambda obj: threading.Thread(delete_it).start())
+                   height=dp(50), width=dp(250), pos_hint={'x': .45, 'y': 0}, on_press=lambda obj: threading.Thread(target=lambda :delete_it()).start())
         )
        
 
-        def deleting_download(obj):
-            str(obj)
-            print(p.StorageAPI().get_all_pids())
-            for pid in p.StorageAPI().get_all_pids():
-                self.history_holder.remove_widget(self.history_holder.ids[str(pid)])
-
-            p.StorageAPI().delete_all_data()
+        def deleting_download():
+            self.history_holder.clear_widgets()
+            multiprocessing.Process(target=p.StorageAPI().delete_all_data()).start()
             SnackBar(essence="extra", message="Record Deleted", bg_color=get_sub_theme_color(essence="tuple"))
 
         def delete_it():
             if not p.KeyMatch().match("save_down_proc"):
-                deleting_download(obj=None)
+                deleting_download()
+
             elif p.KeyMatch().match("save_down_proc"):
                 box = PopupBox(essence="central", title="Cancel Download",
                                bg_color=get_sub_theme_color(essence="string"),
                                escape=False)
-
+                
                 def leave(obj):
                     str(obj)
                     box.exit()
@@ -951,7 +928,7 @@ class MainLayout(BoxLayout):
 
             def update(delta):
                 str(delta)
-                threading.Thread(target=lambda: get_essentials()).start()
+                get_essentials()
 
             Clock.schedule_interval(update, 1 / 999999999999)
             background.add_widget(top)
@@ -987,7 +964,7 @@ class MainLayout(BoxLayout):
         if sequence.confirm_existence():
             self.add_download_tab("all", sequence)
         elif not sequence.confirm_existence():
-            PopupBox(essence="warn", title="Error Sequence", error_code="SEQ124", message="invalid sequence").pop()
+            PopupBox(essence="warn", title="Error Sequence", error_code="SEQ124", message="invalid sequence", beep=True).pop()
 
     def add_download_tab(self, receiver, sequence):
 
@@ -1266,16 +1243,16 @@ class MainLayout(BoxLayout):
 
         def copy_url():
             data = p.StorageAPI().get_unknown(identifier, "url")
-            copy_data(data)
+            multiprocessing.Process(target=lambda :copy_data(data)).start()
             SnackBar(essence="info", message="Link has been copied.", bg_color=get_sub_theme_color(essence="tuple"))
 
         def deleting_download(obj):
             str(obj)
-            self.history_holder.remove_widget(self.history_holder.ids[pid])
-            p.StorageAPI().delete_data(identifier)
+            threading.Thread(target=lambda :self.history_holder.remove_widget(self.history_holder.ids[pid])).start()
+            multiprocessing.Process(target=lambda: p.StorageAPI().delete_data(identifier)).start()
             SnackBar(essence="extra", message="Record Deleted", bg_color=get_sub_theme_color(essence="tuple"))
-            threading.Thread(self.history_holder.clear_widgets()).start()
-            threading.Thread(self.populate_history()).start()
+            threading.Thread(target=lambda :self.history_holder.clear_widgets()).start()
+            threading.Thread(target= lambda :self.populate_history()).start()
             
             
         def delete_it():

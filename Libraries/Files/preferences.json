@@ -5,7 +5,7 @@
     "internet_validation"
    ],
    "value": [
-    true
+    false
    ]
   },
   {
@@ -13,7 +13,7 @@
     "link_validation"
    ],
    "value": [
-    true
+    false
    ]
   },
   {

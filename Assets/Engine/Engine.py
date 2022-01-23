@@ -1,4 +1,4 @@
-import threading
+import multiprocessing
 import urllib.parse
 import requests
 import re
@@ -19,7 +19,7 @@ class TellyEngine:
 
     def request_it(self):
         try:
-            request = requests.get(self.link, stream=True, allow_redirects=True)
+            request = requests.get(self.link, stream=True, allow_redirects=True, headers={'Accept-Encoding': None})
         except Exception as e:
             str(e.args)
             request = None
@@ -34,7 +34,10 @@ class TellyEngine:
     def get_name(self):
         if self.confirm_existence():
             if "Content-Disposition" in self.request.headers.keys():
-                name = re.findall("filename=\"(.+)\"", self.request.headers["Content-Disposition"])[0]
+                try:
+                    name = re.findall("filename=\"(.+)\"", self.request.headers["Content-Disposition"])[0]
+                except:
+                    name = self.link.split("/")[-1]
             else:
                 name = self.link.split("/")[-1]
             name = name.split("?")[0]
@@ -45,7 +48,7 @@ class TellyEngine:
 
     def get_size(self):
         if self.confirm_existence():
-            total_size = self.request.headers["Content-Length"]
+            total_size = self.request.headers["content-length"]
             return int(total_size)
         elif not self.confirm_existence():
             total_size = 1
@@ -104,7 +107,7 @@ class TellyEngine:
                             break
 
     def resume_download(self):
-        threading.Thread(target=lambda: self.prep_resume_download()).start()
+        multiprocessing.Process(target=lambda: self.prep_resume_download()).start()
 
     def prep_download(self):
         with requests.get(self.link, stream=True, allow_redirects=True, timeout=5) as r:
@@ -117,4 +120,4 @@ class TellyEngine:
                         break
 
     def download_file(self):
-        threading.Thread(target=lambda: self.prep_download()).start()
+        multiprocessing.Process(target=lambda: self.prep_download()).start()
