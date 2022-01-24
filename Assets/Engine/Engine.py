@@ -1,4 +1,4 @@
-import multiprocessing
+import threading
 import urllib.parse
 import requests
 import re
@@ -9,7 +9,7 @@ class TellyEngine:
     request = None
 
     def __init__(self, url, directory, tag, identifier, process_id):
-        self.link = r'{}'.format(urllib.parse.unquote(url))
+        self.link = r'{}'.format(url)
         self.directory = directory
         self.tag = tag
         self.identifier = identifier
@@ -19,9 +19,9 @@ class TellyEngine:
 
     def request_it(self):
         try:
-            request = requests.get(self.link, stream=True, allow_redirects=True, headers={'Accept-Encoding': None})
+            request = requests.get(self.link, stream=True, allow_redirects=True, headers={'User-Agent': 'TellyDM v1.9.1','Accept-Encoding': None})
         except Exception as e:
-            str(e.args)
+            print(e.args)
             request = None
         self.request = request
 
@@ -41,6 +41,7 @@ class TellyEngine:
             else:
                 name = self.link.split("/")[-1]
             name = name.split("?")[0]
+            name = r'{}'.format(urllib.parse.unquote(name))
             return name
         if not self.confirm_existence():
             name = "Failure: Error NM101.telly"
@@ -48,8 +49,11 @@ class TellyEngine:
 
     def get_size(self):
         if self.confirm_existence():
-            total_size = self.request.headers["content-length"]
-            return int(total_size)
+            total_size = self.request.headers.get("content-length")
+            if total_size == None:
+                return 1
+            else:
+                return int(total_size)
         elif not self.confirm_existence():
             total_size = 1
             return total_size
@@ -107,7 +111,7 @@ class TellyEngine:
                             break
 
     def resume_download(self):
-        multiprocessing.Process(target=lambda: self.prep_resume_download()).start()
+        threading.Thread(target=lambda: self.prep_resume_download()).start()
 
     def prep_download(self):
         with requests.get(self.link, stream=True, allow_redirects=True, timeout=5) as r:
@@ -120,4 +124,4 @@ class TellyEngine:
                         break
 
     def download_file(self):
-        multiprocessing.Process(target=lambda: self.prep_download()).start()
+        threading.Thread(target=lambda: self.prep_download()).start()

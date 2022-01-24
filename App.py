@@ -789,10 +789,10 @@ class MainLayout(BoxLayout):
                    background_color="#FF5356", size_hint=(None, None), height=dp(25), pos_hint={'x': 0, 'y': 0},
                    on_release=lambda obj: self.copy_paste_empty("url_box", action="empty")))
 
-        download_enter = Button(on_press=lambda obj: self.download_pop.exit(), text="Proceed",
+        download_enter = Button(on_press=lambda obj: threading.Thread(target=lambda :self.download_pop.exit()).start(), text="Proceed",
                                 background_color="#0976FF", size_hint=(None, None), background_normal="", height=dp(25),
                                 pos_hint={'x': .79, 'y': 0})
-        download_enter.bind(on_press=lambda obj: self.checker())
+        download_enter.bind(on_press=lambda obj: threading.Thread(target=lambda :self.checker()))
         download_inner.add_widget(download_enter)
         self.download_pop.content(content=download_inner)
 
@@ -906,9 +906,9 @@ class MainLayout(BoxLayout):
                               background_normal="")
             c_cancel.background_color = "#FF5356"
             c_proceed = Button(text="Proceed",
-                               on_press=lambda obj: self.init_download(sequence=thread),
+                               on_press=lambda obj: threading.Thread(target=lambda :self.init_download(sequence=thread)).start(),
                                size_hint=(None, None),
-                               background_normal="", on_release=lambda obj: affirm.exit())
+                               background_normal="", on_release=lambda obj: threading.Thread(target=lambda :affirm.exit()).start())
             c_proceed.background_color = "#0976FF"
             c_proceed.pos_hint = {'x': .8, 'y': 0}
             c_proceed.height = dp(30)
